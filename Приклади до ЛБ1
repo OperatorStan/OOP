@@ -1,0 +1,79 @@
+// Приклад 1
+
+namespace lab
+{
+    class Example1
+        {
+            static void Main()
+            {
+                Console.WriteLine("Hurray!\nToday is \"Computer science\"!!!");
+            }
+        }
+}
+
+
+// Приклад 2
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication1
+{
+    class Example2
+    {
+        static void Main()
+        {
+            double p = 3.14159;
+            double x = 2.5;
+            double y = Math.Cos(p * x) / (1 + x * x);
+            Console.WriteLine();
+            Console.WriteLine(" x = {0} \t y = {1}", x, y);
+        }
+    }
+}
+
+
+// Приклад 3
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace ConsoleApplication1
+{
+    class Example2
+    {
+        static void Main(string[] args)
+        {
+            OperatingSystem os =
+                System.Environment.OSVersion;
+            Console.WriteLine("Platform: {0}", os.Platform);
+            System.Console.WriteLine("The current date and time is " + System.DateTime.Now);
+            System.Console.ReadLine();
+        }
+    }
+}
+
+
+// Приклад 4
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+namespace lab0
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            System.Console.WriteLine("The current date and time is " + System.DateTime.Now);
+            double pi = 3.14159;
+            Console.WriteLine("Input x =\r");
+            double x = 
+            Convert.ToDouble(Console.ReadLine());
+            double y = Math.Cos(pi * x) / (1 + x * x);
+            Console.WriteLine(" x = {0} \t y = {1}", x, y);
+            Console.ReadLine();
+        }
+    }
+}
+
