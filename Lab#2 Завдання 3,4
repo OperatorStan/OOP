@@ -1,0 +1,27 @@
+//Приклад #3
+int a,b,s,k;
+Console.WriteLine("Input a - left edge");
+a = int.Parse(Console.ReadLine());
+Console.WriteLine("Input b - left edge");
+b = int.Parse(Console.ReadLine());
+s = 0;
+k = 0;
+while (a <= b)
+{
+	s +=a;
+	k++;
+	a++;
+}
+Console.WriteLine("\t Result: s={0}, k={1} \n", s,k);
+
+//Приклад #4
+int a,b,s,k;
+Console.WriteLine("Input a - left edge");
+a = int.Parse(Console.ReadLine());
+Console.WriteLine("Input b - left edge");
+b = int.Parse(Console.ReadLine());
+s = 0;
+k = 0;
+do {s += a; k++; a++;}
+while (a <= b);
+Console.WriteLine("\t Result: s={0}, k={1} \n", s,k);
