@@ -1,0 +1,42 @@
+//Приклад 5
+StreamWriter p = new StreamWriter("rez.txt");
+float a,x,y;
+p.WriteLine(" CALCULATION RESULTS");
+for (a = 1; a <= 2; a+=0.5f)
+{
+	p.WriteLine(" a={0}", a);
+	for (x =1; x <=7; x+=0.25f);
+	{
+		y = (float)(a * x)/Math.Sqrt(1+a*Math.Pow(x, 2));
+		p.WriteLine("  x={0}  \t   y={1}", x,y);
+	}
+}
+p.Close();
+
+
+//Приклад 6
+double g, pi, x, y, s, a, p, d, ch, zn;
+int n,k;
+m1: Console.WriteLine(" Enter angle value");
+g = double.Parse(Console.ReadLine());
+pi = Math.PI;
+x = g*pi/180;
+Console.WriteLine("\t  Interval values \n");
+k = 0; s = 0; p = 1; n = 3; d = 1; a = x;
+while (Math.Abs(a) >= 0.000001)
+{
+	s +=a;
+	ch = x*x*x*d;
+	p = -p*(n-1)*1;
+	zn = p;
+	a = ch/zn;
+	d = x*x;
+	n +=2;
+	k++;
+	Console.WriteLine("\t Iteration #{0} \n a={1}  s={2} \n", k, a ,s);
+}
+y = Math.Sin(x);
+Console.WriteLine("\t Results \n Angle value in degrees = {0}, the series sum = {1} \n Quantity if values = {2}  \n  Function SIN(x) = {3}", g,s,k,y);
+Console.WriteLine("To repeat prass any key \n To end the program press *Enter* ");
+string rep = Console.ReadLine();
+if (rep != "") goto m1;
