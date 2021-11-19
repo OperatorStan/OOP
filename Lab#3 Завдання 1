@@ -1,0 +1,44 @@
+using System;
+namespace ConsoleTests
+{
+    class Program
+	{
+		static void Main()
+		{	
+			int[] A = new int[2]{2,4};
+			int[] B = new int[2]{3,7};
+			int[] C = new int[2]{8,2};
+			int[] D = new int[2]{9,5};
+			double AB, AC, BC, BD, CD, CA, DA;
+			AB = way(A,B);
+			AC = way(A,C);
+			CA = AC;
+			DA = way(D, A);
+			BC = way(B,C);
+			BD = way(B,D);
+			CD = way(C,D);
+			string max = Convert.ToString(Compare(AB, BC, AC, BD, DA, CD));
+			Console.WriteLine("Biggest perimeter was " +max);
+ 		}
+		public static double way(int[] I, int[] II)
+		{
+			int f, s, t, q;
+			f = I[0];
+			s = II[0];
+			t = I[1];
+			q = II[1];
+			double lenth = Math.Sqrt(Math.Pow(s-f, 2)+Math.Pow(q-t, 2));
+
+			return lenth;
+		}
+		public static double Compare(double a,double b,double c,double d,double e,double f)
+		{   
+			double max =0;
+			double abc = a + b + c, abd = a + d + e, acd = c + f + e;
+			if (abc>max) max = abc;
+			if (abd>max) max = abd;
+			if (acd>max) max = acd;
+			return max;
+		}	
+	}	
+}
