@@ -1,23 +1,13 @@
-double x, y, s, a, p, d, ch, zn;
-int n,k;
-m1: Console.WriteLine("Enter X ==> ");
-x = double.Parse(Console.ReadLine());
-Console.WriteLine("\t  Interval values \n");
-k = 0; s = 0; p = 1; n = 3; d = 1; a = x;
-while (Math.Abs(a) >= 0.00001)
+//Завдання 1
+float a,x;
+double y;
+Console.WriteLine(" CALCULATION RESULTS");
+for (a = 0.5f; a <= 1.25; a+=0.25f)
 {
-    s +=a;
-    ch = x*x*x*d;
-    p = p*(n-1)*1;
-    zn = p;
-    a = 2 * (ch/zn);
-    d = x*x;
-    n +=2;
-    k++;
-    Console.WriteLine("\t Iteration #{0} \n a={1}  s={2} \n", k, a ,s);
+    Console.WriteLine(" a={0}", a);
+    for (x =1; x <=7; x+=0.25f)
+    {
+        y = Convert.ToDouble(Math.Sqrt(Math.Sqrt(a+1)*x)+Math.Exp(0 - Math.Pow(x, 3))/Math.Sqrt(2*a*x));
+        Console.WriteLine("  x={0}  \t   y={1}", x,y);
+    }
 }
-y = Math.Log((1+x)/(1-x));
-Console.WriteLine("\t Results: \n The series sum = {0} \n Quantity if values = {1}  \n  Function y = ln((1+x)/(1-x)) = {2}",s,k,y);
-Console.WriteLine("To repeat prass any key \n To end the program press *Enter* ");
-string rep = Console.ReadLine();
-if (rep != "") goto m1;
