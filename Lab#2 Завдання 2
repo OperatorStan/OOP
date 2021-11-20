@@ -1,0 +1,25 @@
+//Завдання 2
+double x, y, s, a, p, d, ch, zn;
+int n,k;
+m1: Console.WriteLine("Enter X ==> ");
+x = double.Parse(Console.ReadLine());
+Console.WriteLine("\t  Interval values \n");
+k = 0; s = 0; p = 1; n = 3; d = 1; a = x;
+while (Math.Abs(a) >= 0.00001)
+{
+    s +=a;
+    ch = x*x*x*d;
+    p = p*(n-1)*1;
+    zn = p;
+    a = 2 * (ch/zn);
+    d = x*x;
+    n +=2;
+    k++;
+    Console.WriteLine("\t Iteration #{0} \n a={1}  s={2} \n", k, a ,s);
+}
+y = Math.Log((1+x)/(1-x));
+Console.WriteLine("\t Results: \n The series sum = {0} \n Quantity if values = {1}  \n  Function y = ln((1+x)/(1-x)) = {2}",s,k,y);
+Console.WriteLine("To repeat prass any key \n To end the program press *Enter* ");
+string rep = Console.ReadLine();
+if (rep != "") goto m1;
+Результати для контрольних значень 
