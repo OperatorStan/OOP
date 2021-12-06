@@ -1,0 +1,109 @@
+public class Animal
+{
+    public int stat = 1;
+    public string Царство = "Тварин";
+    public string Name {get; set;}
+    int Size {get; set;}
+    public Animal(string Name, int Size)
+    {
+        this.Name = Name;
+        this.Size = Size;
+    }
+    public Animal()
+    {
+        Name = "None";
+        Size = 0;
+    }
+    public void Info()
+    {
+        Console.WriteLine("Тварина {0} з розмiром {1} iз царства {2}", this.Name, this.Size, this.Царство);
+    }
+    public void Status()
+    {   
+        if(stat == 1)
+        {
+            Console.WriteLine("На даний момент {0}, жива", this.Name);
+
+        }
+        if(stat == 0)
+        {
+            Console.WriteLine("На даний момент {0} мертва", this.Name);
+        } 
+    }  
+}
+public class Mammal : Animal
+{
+    public string color {get; set;}
+    public int Number {get; set;}
+    public Mammal()
+    {
+        color = "None";
+        Number = 0;
+    }
+    public Mammal(string Name, int Size, string color, int Number)
+    :base(Name, Size)
+    {
+        this.color = color;
+        this.Number = Number;
+    }
+    public void Die()
+    {
+        this.stat = 0;
+        Console.WriteLine("О нi iстота {0} померла", Name);
+    }
+    public void Evolve()
+    {
+        Console.WriteLine("Воно еволюцiонувало");
+    }
+
+}
+public class Clove : Mammal
+{
+    public int Speed;
+    public Clove(string Name, int Size, string color, int Number, int Speed)
+    :base(Name, Size, color, Number)
+    {
+        this.Speed = Speed;
+    }
+    public Clove()
+    {
+        this.Speed = 10;
+    }
+    public void Run()
+    {
+        Console.WriteLine("{0} побiжаB зi швидкiстю {1} км/год", Name, Speed);
+    }
+}
+public class Bird : Mammal
+{
+    public int WingsSize;
+    public Bird(string Name, int Size, string color, int Number, int WingsSize)
+    :base(Name, Size, color, Number)
+    {
+        this.WingsSize = WingsSize;
+    }
+    public void Hatch()
+    {
+        Number += 1;
+    }
+    public void Inspect()
+    {
+        Console.WriteLine("{0} Має розмаї крил в {1} cm, та популяцieю в {2}", Name, WingsSize, Number);
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        Bird какаду = new Bird("Kakadu", 22, "бiлий", 10534, 50);
+        Clove кінь = new Clove("Kinь", 150, "коричневый", 540023, 70);
+        Mammal ящірка = new Mammal("Ящiрка", 10, "зелений", 64351);
+        какаду.Info();
+        какаду.Hatch();
+        какаду.Inspect();
+        кінь.Run();
+        ящірка.Status();
+        ящірка.Die();
+        ящірка.Status();
+    }   
+}
