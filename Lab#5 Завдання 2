@@ -1,0 +1,85 @@
+abstract class Animal
+{
+    public abstract void Create(string name, string place, int count); 
+    public abstract void Info(); //Виводить загальну інформацію про тварину
+    public abstract void Tame(); //Спроба приручити тварину
+}
+
+class Mammal: Animal
+{
+    private string name="", place = "";
+    private int count;
+    public override void Create(string name, string place, int count)
+    {
+        this.name = name;
+        this.place = place;
+        this.count =  count;
+        Console.WriteLine("Примати (Primates, вiд лат. primas) — ряд плацентарних ссавцiв, що включає, зокрема, мавп i людину. Ряд налiчує 515 сучасних видiв у 16 родинах.");
+    }
+    public override void Info() //Виводить загальну інформацію про тварину
+    {
+        Console.WriteLine("Примат {0} з мiсця {1} де їх налiсуєється поняд {2}", name, place, count);
+    }
+    public override void Tame() //Спроба приручити тварину
+    {
+        Console.WriteLine("Примата дуже складно приручити, але можна навчити."); 
+    }
+}
+class Bird: Animal
+{
+    private string name="", color = "";
+    private int count;
+    public override void Create(string name, string color, int count)
+    {
+        this.name = name;
+        this.color = color;
+        this.count =  count;
+        Console.WriteLine("Птахи (Aves) — клас теплокровних яйцекладних вищих хребетних тварин, якi пересуваються на двох ногах, а їхнi переднi кiнцiвки перетворилися на крила.");
+    }
+    public override void Info() //Виводить загальну інформацію про тварину
+    {
+        Console.WriteLine("Птах {0}, що моє прекрасный {1} колiр. Їх налiсуєється поняд {2}", name, color, count);
+    }
+    public override void Tame() //Спроба приручити тварину
+    {
+        Console.WriteLine("Птаха легше закрити в клiтцi нiж приручити"); 
+    }
+}
+class Clove: Animal
+{
+    private string name="", food = "";
+    private int hight;
+    public override void Create(string name, string food, int hight )
+    {
+        this.name = name;
+        this.food = food;
+        this.hight =  hight;
+        Console.WriteLine("Парнокопитнi (парнокопитi, паристокопитi, парнопалi), або Оленеподiбнi— ряд плацентарних ссавцiв, який нараховує приблизно 356 сучасних видiв у 23 родинах.");
+    }
+    public override void Info() //Виводить загальну інформацію про тварину
+    {
+        Console.WriteLine("Парнокопитне {0} дуже полюбляє {1} та може маты висоту до {2} см", name, food, hight);
+    }
+    public override void Tame() //Спроба приручити тварину
+    {
+        Console.WriteLine("Деяких парнокопитних можна використовувати як засіб пересування"); 
+    }
+}
+
+public class Launcher
+{
+    public static void Main()
+    {
+        Animal a;
+        a = new Clove();
+        a.Create("кiнь","сiно", 249);   
+        a.Info();
+        a.Tame(); 
+        a = new Bird();
+        a.Create("ворона","чорний", 86535634);
+        a.Info();
+        a.Tame();
+        a = new Mammal();
+        a.Create("шимпанзе", "Африка", 4567481);
+    }   
+}
