@@ -1,85 +1,116 @@
-interface Animal
+public class Animal
 {
-    void Create(string name, string place, int count); 
-    void Info(); //Виводить загальну інформацію про тварину
-    void Tame(); //Спроба приручити тварину
-}
-
-class Mammal: Animal
-{
-    private string name="", place = "";
-    private int count;
-    public void Create(string name, string place, int count)
+    public string Царство = "Тварина";
+    public string Name;
+    int Size;
+    public Animal(string Name, int Size)
     {
-        this.name = name;
-        this.place = place;
-        this.count =  count;
-        Console.WriteLine("Примати (Primates, вiд лат. primas) — ряд плацентарних ссавцiв, що включає, зокрема, мавп i людину. Ряд налiчує 515 сучасних видiв у 16 родинах.");
+        this.Name = Name;
+        this.Size = Size;
     }
-    public void Info() 
+    public Animal()
     {
-        Console.WriteLine("Примат {0} з мiсця {1} де їх налiсуєється поняд {2}", name, place, count);
-    }
-    public void Tame()
-    {
-        Console.WriteLine("Примата дуже складно приручити, але можна навчити."); 
-    }
-}
-class Bird: Animal
-{
-    private string name="", color = "";
-    private int count;
-    public void Create(string name, string color, int count)
-    {
-        this.name = name;
-        this.color = color;
-        this.count =  count;
-        Console.WriteLine("Птахи (Aves) — клас теплокровних яйцекладних вищих хребетних тварин, якi пересуваються на двох ногах, а їхнi переднi кiнцiвки перетворилися на крила.");
-    }
-    public void Info() 
-    {
-        Console.WriteLine("Птах {0}, що моє прекрасный {1} колiр. Їх налiсуєється поняд {2}", name, color, count);
-    }
-    public void Tame()
-    {
-        Console.WriteLine("Птаха легше закрити в клiтцi нiж приручити"); 
-    }
-}
-class Clove: Animal
-{
-    private string name="", food = "";
-    private int hight;
-    public void Create(string name, string food, int hight )
-    {
-        this.name = name;
-        this.food = food;
-        this.hight =  hight;
-        Console.WriteLine("Парнокопитнi (парнокопитi, паристокопитi, парнопалi), або Оленеподiбнi— ряд плацентарних ссавцiв, який нараховує приблизно 356 сучасних видiв у 23 родинах.");
+        Name = "Тварина";
     }
     public void Info()
     {
-        Console.WriteLine("Парнокопитне {0} дуже полюбляє {1} та може маты висоту до {2} см", name, food, hight);
+        Console.WriteLine("Тварина {0} з розмiром {1} iз царства \n", this.Name, this.Size, this.Царство);
     }
-    public void Tame()
+    public void Status(bool state)
+    {   
+        if(state)
+        
+            Console.WriteLine("На даний момент {0}, жива", this.Name);
+        else
+            Console.WriteLine("На даний момент {0} мертва", this.Name);
+        
+    }  
+}
+public class Mammal : Animal
+{
+    public string color {get; set;}
+    public int Number {get; set;}
+    private Animal creature;
+    public Mammal()
     {
-        Console.WriteLine("Деяких парнокопитних можна використовувати як засіб пересування"); 
+        color = "None";
+        Number = 0;
+        creature = new Animal();
     }
+    public Mammal(string Name, int Size, string color, int Number)
+    :base(Name, Size)
+    {
+        this.color = color;
+        this.Number = Number;
+        creature = new Animal();
+    }
+    public void Evolve(bool aliv)
+    {
+        creature.Status(aliv);
+        if(aliv)
+            Console.WriteLine("Воно еволюцiонувало");
+    }
+
+}
+public class Clove : Mammal
+{
+    public int Speed;
+    private Mammal growth;
+    
+    public Clove(string Name, int Size, string color, int Number, int Speed)
+    :base(Name, Size, color, Number)
+    {
+        this.Speed = Speed;
+        growth = new Mammal();
+    }
+    public Clove()
+    {
+        this.Speed = 10;
+    }
+    public void Run(bool aliv)
+    {
+        growth.Evolve(aliv);
+        if(aliv)
+            Console.WriteLine("{0} побiжав зi швидкiстю {1} км/год", Name, Speed);
+    }
+
+}
+public class Bird : Mammal
+{
+    public int WingsSize;
+    private Mammal growth;
+    public Bird(string Name, int Size, string color, int Number, int WingsSize)
+    :base(Name, Size, color, Number)
+    {
+        this.WingsSize = WingsSize;
+        growth = new Mammal();
+    }
+    public void Hatch()
+    {
+        Number += 1;
+    }
+    public void Inspect(bool aliv)
+    {
+        growth.Evolve(aliv);
+        if (aliv)
+            Console.WriteLine("{0} Має розмах крил в {1} cm", Name, WingsSize);
+        else
+            Console.WriteLine("{0} Мала розмах крил в {1} cm, колись", Name, WingsSize);
+    }
+
 }
 
-public class Launcher
+class Program
 {
-    public static void Main()
+    static void Main()
     {
-        Animal a;
-        a = new Clove();
-        a.Create("кiнь","сiно", 249);   
-        a.Info();
-        a.Tame(); 
-        a = new Bird();
-        a.Create("ворона","чорний", 86535634);
-        a.Info();
-        a.Tame();
-        a = new Mammal();
-        a.Create("шимпанзе", "Африка", 4567481);
-    }   
+        Bird какаду = new Bird("Kaкaду", 22, "бiлий", 10534, 50);
+        Clove кінь = new Clove("Kiнь", 150, "коричневый", 540023, 70);
+        Mammal ящірка = new Mammal("Ящiрка", 10, "зелений", 64351);
+        какаду.Inspect(false);
+        кінь.Run(false);
+        кінь.Run(true);
+        ящірка.Status(true);
+        ящірка.Status(false);
+    }
 }
