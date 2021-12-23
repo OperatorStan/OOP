@@ -1,44 +1,45 @@
 using System;
 namespace ConsoleTests
-{
-    class Program
-	{
-		static void Main()
-		{	
-			int[] A = new int[2]{2,4};
-			int[] B = new int[2]{3,7};
-			int[] C = new int[2]{8,2};
-			int[] D = new int[2]{9,5};
-			double AB, AC, BC, BD, CD, CA, DA;
-			AB = way(A,B);
-			AC = way(A,C);
-			CA = AC;
-			DA = way(D, A);
-			BC = way(B,C);
-			BD = way(B,D);
-			CD = way(C,D);
-			string max = Convert.ToString(Compare(AB, BC, AC, BD, DA, CD));
-			Console.WriteLine("Biggest perimeter was " +max);
- 		}
-		public static double way(int[] I, int[] II)
-		{
-			int f, s, t, q;
-			f = I[0];
-			s = II[0];
-			t = I[1];
-			q = II[1];
-			double lenth = Math.Sqrt(Math.Pow(s-f, 2)+Math.Pow(q-t, 2));
-
-			return lenth;
-		}
-		public static double Compare(double a,double b,double c,double d,double e,double f)
-		{   
-			double max =0;
-			double abc = a + b + c, abd = a + d + e, acd = c + f + e;
-			if (abc>max) max = abc;
-			if (abd>max) max = abd;
-			if (acd>max) max = acd;
-			return max;
-		}	
-	}	
+{    public class Line
+    {
+        public static double make(int[] I, int[] II) //повертає довжину відрізку за двома точками
+        {
+            double lenth = Math.Sqrt(Math.Pow(II[0]-I[0], 2)+Math.Pow(II[1]-I[1], 2));
+            return lenth;
+        }
+    }
+    public class Triangle
+    {
+        public static double perimeter(int[] a, int[] b, int[] c)
+        {
+            double ab, bc, ca;
+            ab = Line.make(a,b);
+            bc = Line.make(b,c);
+            ca = Line.make(c,a);
+            return ab + bc + ca;
+        }
+        public static void comparer(double f, double s, double t)
+        {
+            double max =0;
+            if (f>max) max = f;
+            if (s>max) max = s;
+            if (t>max) max = t;
+            Console.WriteLine("Biggest perimeter was " + max);
+        }
+    }
+        public class Progrm
+    {
+        static void Main()
+        {
+            double ABC, ABD, ACD;
+            int[] a = new int[2]{2,4};
+            int[] b = new int[2]{3,7};
+            int[] c = new int[2]{8,2};
+            int[] d = new int[2]{9,5};
+            ABC = Triangle.perimeter(a, b, c);
+            ABD = Triangle.perimeter(a, b, d);
+            ACD = Triangle.perimeter(a, c, d);
+            Triangle.comparer(ABC, ABC, ACD);
+        }
+    }
 }
