@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace BackpackTask
+{
+    class Item
+    {
+        public string name { get; set; }
+        public double weigth { get; set; }
+        public double price { get; set; }
+        public Item(string _name, double _weigth, double _price)
+        {
+            name = _name;
+            weigth = _weigth;
+            price = _price;
+        }
+        private List<Item> bestItems = null;
+        private double maxW;
+        private double bestPrice;
+        void Backpack(double _maxW)
+
+        {
+            maxW = _maxW;
+        }
+        private double CalcWeigth(List<Item> items)
+        {
+            double sumW = 0;
+            foreach (Item i in items)
+            {
+                sumW += i.weigth;
+            }
+            return sumW;
+        }
+        private double CalcPrice(List <Item> items)
+        {
+            double sumPrice = 0;
+            foreach (Item i in items)
+            {
+                sumPrice += i.price;
+            }
+            return sumPrice;
+        }
+        private void CheckSet(List <Item> items)
+        {
+            if (bestItems == null)
+            {
+                if (CalcWeigth(items) <= maxW)
+                {
+                    bestItems = items;
+                    bestPrice = CalcPrice(items);
+                }
+            }
+            else
+            {
+                if (CalcWeigth(items) <= maxW && CalcPrice(items) > bestPrice)
+                {
+                    bestItems = items;
+                    bestPrice = CalcPrice(items);
+                }
+            }
+        }
+    }    
+}
