@@ -1,0 +1,456 @@
+\\Завдання 1
+#include <iostream>
+using namespace std;
+struct comp 
+{
+	int Data;
+	comp* next;
+};
+void push(comp** top, int D) 
+{ 
+	comp* q;
+	q = new comp();
+	q->Data = D;
+	if (top == NULL) 
+	{
+		*top = q;
+	}
+	else
+	{
+		q->next = *top;
+		*top = q;
+	}
+}
+void delete_key(comp** top, int N) 
+{
+	comp* q = *top;
+	comp* prev = NULL;
+	while (q != NULL) 
+	{
+		if (q->Data == N) 
+		{
+			if (q == *top) 
+			{
+				*top = q->next;
+				free(q);
+				q->Data = NULL;
+				q->next = NULL;
+			}
+			else
+			{
+				prev->next = q->next;
+				free(q);
+				q->Data = NULL;
+				q->next = NULL;
+			}
+		}
+		prev = q;
+		q = q->next;
+	}
+}
+void print(comp* top) 
+{ 
+	comp* q = top; 
+	while (q) { 
+		printf_s("%i", q->Data);
+		q = q->next;
+	}
+}
+void main() 
+{
+	comp* top = NULL;
+	int k;
+	double x;
+	cout << "Enter number of elements: ";
+	cin >> k;
+	for (int i = 0; i < k; i++)
+	{
+		cout << "Enter element: ";
+		cin >> x;
+		push(&top, x);
+	}
+	print(top);
+}
+
+\\Завдання 2
+#include <iostream>
+using namespace std;
+struct comp
+{
+	int Data;
+	comp* next;
+};
+void push(comp** top, int D)
+{
+	comp* q;
+	q = new comp();
+	q->Data = D;
+	if (top == NULL)
+	{
+		*top = q;
+	}
+	else
+	{
+		q->next = *top;
+		*top = q;
+	}
+}
+void print(comp* top)
+{
+	comp* q = top;
+	while (q) {
+		printf_s("%i", q->Data);
+		q = q->next;
+	}
+}
+void main()
+{
+	comp* top = NULL;
+	comp* top1 = NULL;
+	int k;
+	int x;
+	cout << "Enter number of elements: ";
+	cin >> k;
+	for (int i = 0; i < k; i++)
+	{
+		cout << "Enter element: ";
+		cin >> x;
+		if (x % 2 == 0)
+			push(&top, x);
+		else
+			push(&top1, x);
+	}
+	print(top);
+	cout << endl;
+	print(top1);
+}
+
+\\Завдання 3
+#include <iostream>
+using namespace std;
+const int N = 5;
+struct Deque
+{
+	int data[N];
+	int last;
+};
+void Creation(Deque* D)
+{
+	D->last = 0;
+}
+bool Full(Deque* D)
+{
+	if (D->last == 0) return true;
+	else return false;
+}
+void AddL(Deque* D)
+{
+	if (D->last == N)
+	{
+		cout << "Deque is full" << endl;
+	}
+	int value;
+	cout << "Value: "; cin >> value;
+	for (int i = D->last; i > 0; i--)
+		D->data[i] = D->data[i - 1];
+	D->data[0] = value;
+	D->last++;
+	cout << endl << "Element added" << endl;
+}
+void AddR(Deque* D)
+{
+	if (D->last == N)
+	{
+		cout << "Deque is full" << endl; 
+	}
+	int value;
+	cout << "Value: "; cin >> value;
+	D->data[D->last++] = value;
+	cout << endl << "Element added" << endl;
+}
+void DeleteL(Deque* D)
+{
+	for (int i = 0; i < D->last; i++)
+		D->data[i] = D->data[i + 1]; D->last--;
+}
+void DeleteR(Deque* D)
+{
+	D->last--;
+}
+int OutputL(Deque* D)
+{
+	return D->data[0];
+}
+int OutputR(Deque* D)
+{
+	return D->data[D->last - 1];
+}
+int Size(Deque* D)
+{
+	return D->last;
+}
+int main()
+{
+	Deque D;
+	Creation(&D);
+	char number;
+	do
+	{
+		cout << "1. Add element to the start" << endl;
+		cout << "2. Add element in the end" << endl;
+		cout << "3. Delete first element" << endl;
+		cout << "4. Delete last element" << endl;
+		cout << "5. Output first element" << endl;
+		cout << "6. Output last element" << endl;
+		cout << "7. Show size of deque" << endl;
+		cout << "0. End" << endl;
+		cout << "Enter number of command: "; cin >> number;
+		switch (number)
+		{
+		case '1': AddL(&D);
+			break;
+		case '2': AddR(&D);
+			break;
+		case '3':
+			if (Full(&D)) cout << endl << "Deque is empty" << endl;
+			else
+			{
+				DeleteL(&D);
+				cout << endl << "Element deleted" << endl;
+			} break;
+		case '4':
+			if (Full(&D)) cout << endl << "Deque is empty" << endl;
+			else
+			{
+				DeleteR(&D);
+				cout << endl << "Element deleted" << endl;
+			} break;
+		case '5':
+			if (Full(&D)) cout << endl << "Deque is empty" << endl;
+			else cout << "First element: " << OutputL(&D) << endl;
+			break;
+		case '6':
+			if (Full(&D)) cout << endl << "Deque is empty" << endl;
+			else cout << "Last element: " << OutputR(&D) << endl;
+			break;
+		case '7':
+			if (Full(&D)) cout << endl << "Deque is empty" << endl;
+			else cout << "Size of deque: " << Size(&D) << endl;
+			break;
+		case '0': break;
+		default: cout << endl << "Command not defined";
+			break;
+		}
+	} while (number != '0');
+	return 0;
+}
+
+\\Завдання 4
+#include <iostream>
+using namespace std;
+const int N = 5;
+struct Deque
+{
+	int data[N];
+	int last;
+};
+void Creation(Deque* D)
+{
+	D->last = 0;
+}
+void AddL(Deque* D)
+{
+	if (D->last == N)
+	{
+		cout << "Deque is full" << endl;
+	}
+	int value;
+	cout << "Value: "; cin >> value;
+	for (int i = D->last; i > 0; i--)
+		D->data[i] = D->data[i - 1];
+	D->data[0] = value;
+	D->last++;
+	cout << "Element added" << endl;
+}
+void Check(Deque* D)
+{
+	int k = 0;
+	for (int i = 0; i < D->last / 2; i++)
+	{
+		if (D->last != D->data[i])
+		{
+			k--;
+		}
+		else
+		{
+			k++;
+		}
+		D->last--;
+	}
+	if (k >= D->last / 2-1)
+		cout << "Palindrom" << endl;
+	else
+		cout << "Not palindrom" << endl;
+}
+int main()
+{
+	Deque D;
+	Creation(&D);
+	for (int i = 0; i < 5; i++)
+	{
+		AddL(&D);
+	}
+	Check(&D);
+	return 0;
+}
+
+\\Завдання 5
+#include <iostream> 
+#include <stack> 
+using namespace std;
+int priority(char oper)
+{
+	if (oper == '+' || oper == '-')
+		return 1;
+	if (oper == '*' || oper == '/')
+		return 2;
+}
+int main() {
+	string pharse, prn;
+	cin >> pharse;
+	stack<char> tmp;
+	stack <double> result;
+	for (int i = 0; i < pharse.size(); i++)
+	{
+		if (isdigit(pharse[i]))
+			prn.push_back(pharse[i]);
+		else
+		{
+			prn.push_back(' ');
+			while (!tmp.empty() && priority(pharse[i]) <= priority(tmp.top()))
+			{
+				prn.push_back(tmp.top());
+				tmp.pop();
+			}
+			tmp.push(pharse[i]);
+		}
+	}
+	while (!tmp.empty())
+	{
+		prn.push_back(tmp.top());
+		tmp.pop();
+	}
+	for (int i = 0; i < prn.size(); i++)
+	{
+		if (isdigit(prn[i]))
+		{
+			double num = double(prn[i] - '0');
+			for (++i; isdigit(prn[i]) && i < prn.size(); i++)
+			{
+				num *= 10; num += double(prn[i] - '0');
+			}
+			result.push(num);
+			if (prn[i] != ' ')
+				i--;
+		}
+		else
+		{
+			double r = result.top();
+			result.pop();
+			double l = result.top();
+			result.pop();
+			switch (prn[i])
+			{
+			case'+':
+				result.push(l + r);
+				break;
+			case'-':
+				result.push(l - r);
+				break;
+			case'*':
+				result.push(l * r);
+				break;
+			case'/':
+				result.push(double(l / r));
+				break;
+			}
+		}
+	}
+	cout << "=" << result.top() << endl;
+}
+*/
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int steck(char c)
+{
+	if (c == '^')
+		return 3;
+	else if (c == '/' || c == '*')
+		return 2;
+	else if (c == '+' || c == '-')
+		return 1;
+	else
+		return -1;
+}
+
+void ConvertToPostFix(string s)
+{
+
+	stack<char> st;
+
+	string result;
+
+	for (int i = 0; i < s.length(); i++) {
+		char c = s[i];
+
+		if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+			|| (c >= '0' && c <= '9'))
+			result += c;
+
+		else if (c == '(')
+			st.push('(');
+
+		else if (c == ')') {
+			while (st.top() != '(') {
+				result += st.top();
+				st.pop();
+			}
+			st.pop();
+		}
+
+		else {
+			while (!st.empty()
+				&& steck(s[i]) <= steck(st.top())) {
+				if (c == '^' && st.top() == '^')
+					break;
+				else {
+					result += st.top();
+					st.pop();
+				}
+			}
+			st.push(c);
+		}
+	}
+
+	while (!st.empty()) {
+		result += st.top();
+		st.pop();
+	}
+
+	cout << result << endl;
+}
+
+int main()
+{
+	string exp = "(A-B-C)/D-E*F";
+	ConvertToPostFix(exp);
+	string exp1 = "(A+B)*C-(D+E)/F";
+	ConvertToPostFix(exp1);
+	string exp2 = "A/(B-C)+D*(E-F)";
+	ConvertToPostFix(exp2);
+	string exp3 = "(A*B+C)/D-F/E";
+	ConvertToPostFix(exp3);
+	return 0;
+}
